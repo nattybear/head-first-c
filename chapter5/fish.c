@@ -10,5 +10,5 @@ struct fish {
 int main()
 {
   struct fish snappy = {"Snappy", "piranha", 69, 4};
-  printf("Name = %s\n", snappy[0]);
+  printf("Name = %s\n", snappy.name);
 }
