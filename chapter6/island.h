@@ -1,3 +1,5 @@
+#include <string.h>
+
 typedef struct island {
   char *name;
   char *opens;
