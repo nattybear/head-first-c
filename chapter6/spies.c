@@ -76,6 +76,7 @@ int main()
         printf("Give me a question that is TRUE for %s but not for %s? ",
           suspect, current->question);
         fgets(question, 80, stdin);
+        free(current->question);
         current->question = strdup(question);
 
         break;
