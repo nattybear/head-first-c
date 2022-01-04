@@ -28,6 +28,6 @@ void find()
 
 int main()
 {
-  find(ADS);
+  find();
   return 0;
 }
