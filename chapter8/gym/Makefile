@@ -1,5 +1,5 @@
 hfcal.o: hfcal.c
-	gcc -I./includes -c hfcal.c -o hfcal.o
+	gcc -I./includes -c -fPIC hfcal.c -o hfcal.o
 
 elliptical.o: elliptical.c
 	gcc -I./includes -c elliptical.c -o elliptical.o
