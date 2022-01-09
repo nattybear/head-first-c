@@ -5,9 +5,9 @@
 
 int main(int argc, char *argv[])
 {
-  char *feeds[] = {"http://www.cnn.com/rss/celebs.xml",
-                   "http://www.rollingstone.com/rock.xml",
-                   "http://eonline.com/gossip.xml"};
+  char *feeds[] = {"http://rss.cnn.com/rss/edition.rss",
+                   "https://www.rollingstone.de/feed/",
+                   "https://www.etonline.com/news/rss"};
   int times = 3;
   char *phrase = argv[1];
   int i;
