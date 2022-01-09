@@ -28,5 +28,7 @@ int main(int argc, char *argv[])
   if (waitpid(pid, &pid_status, 0) == -1) {
     error("Error waiting for child process");
   }
+  if (wexitstatus(pid_status))
+    puts("Error status non-zero");
   return 0;
 }
