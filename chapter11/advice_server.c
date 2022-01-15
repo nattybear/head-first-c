@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
   if (setsockopt(listener_d,
       SOL_SOCKET,
       SO_REUSEADDR,
-      (char *)&resue, sizeof(int)) == -1)
+      (char *)&reuse, sizeof(int)) == -1)
     error("Can't set the reuse option on the socket");
 
   int c = bind(listener_d, (struct sockaddr *) &name, sizeof(name));
