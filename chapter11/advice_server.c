@@ -4,6 +4,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <error.h>
 
 int main(int argc, char *argv[])
 {
@@ -20,15 +21,31 @@ int main(int argc, char *argv[])
   name.sin_family = PF_INET;
   name.sin_port = (in_port_t)htons(30000);
   name.sin_addr.s_addr = htonl(INADDR_ANY);
-  bind(listener_d, (struct sockaddr *) &name, sizeof(name));
-  listen(listener_d, 10);
+
+  int c = bind(listener_d, (struct sockaddr *) &name, sizeof(name));
+  if (c == -1)
+    error("Can't bind to socket");
+
+  if (listen(listener_d, 10) == -1)
+    error("Can't listen");
+
   puts("Waiting for connection");
   while (1) {
     struct sockaddr_storage client_addr;
     unsigned int address_size = sizeof(client_addr);
-    int connect_d = accept(listener_d, (struct sockaddr *)&client_addr, &address_size);
+
+    int connect_d = accept(listener_d,
+                           (struct sockaddr *)&client_addr,
+                           &address_size);
+
+    if (connect_d == -1)
+      error("Can't open secondary socket");
+
     char *msg = advice[rand() % 5];
-    send(connect_d, msg, strlen(msg), 0);
+
+    if (send(connect_d, msg, strlen(msg), 0) == -1)
+      error("Can't send message to client");
+
     close(connect_d);
   }
   return 0;
