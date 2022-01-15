@@ -22,6 +22,13 @@ int main(int argc, char *argv[])
   name.sin_port = (in_port_t)htons(30000);
   name.sin_addr.s_addr = htonl(INADDR_ANY);
 
+  int reuse = 1;
+  if (setsockopt(listener_d,
+      SOL_SOCKET,
+      SO_REUSEADDR,
+      (char *)&resue, sizeof(int)) == -1)
+    error("Can't set the reuse option on the socket");
+
   int c = bind(listener_d, (struct sockaddr *) &name, sizeof(name));
   if (c == -1)
     error("Can't bind to socket");
@@ -30,6 +37,7 @@ int main(int argc, char *argv[])
     error("Can't listen");
 
   puts("Waiting for connection");
+
   while (1) {
     struct sockaddr_storage client_addr;
     unsigned int address_size = sizeof(client_addr);
